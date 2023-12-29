@@ -2,13 +2,27 @@
 #define CONTEXT_H__
 
 #include "../include/raylib.h"
+#include "Common.h"
+#include "E_Cell.h"
+#include "Template.h"
+#include "S_ID.h"
+#include "RP_Cell.h"
 
 typedef struct Context {
-
-    int windowWidth;
-    int windowHeight;
+    // 40 * 22.5 格一屏
+    int baseGameWidth;    // 960
+    int baseGameHeight;   // 540
 
     Camera2D *cam;
+
+    // ==== Repository ====
+    RP_Cell *rp_cell;
+
+    // ==== Template ====
+    Template *tpl;
+
+    // ==== Service ====
+    S_ID *s_id;
 
 } Context;
 

@@ -1,5 +1,8 @@
 {
     "files.associations": {
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
         "dientity.h": "c",
         "raylib.h": "c",
         "common.h": "c",
@@ -9,6 +12,7 @@
         "raymath.h": "c",
         "monsterentity.h": "c",
         "bulletentity.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cmath": "cpp"
     }
 }
