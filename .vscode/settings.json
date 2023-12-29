@@ -13,6 +13,7 @@
         "monsterentity.h": "c",
         "bulletentity.h": "c",
         "stdio.h": "c",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "template.h": "c"
     }
 }

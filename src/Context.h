@@ -7,6 +7,7 @@
 #include "Template.h"
 #include "S_ID.h"
 #include "RP_Cell.h"
+#include "App_UI.h"
 
 typedef struct Context {
     // 40 * 22.5 格一屏
@@ -14,6 +15,8 @@ typedef struct Context {
     int baseGameHeight;   // 540
 
     Camera2D *cam;
+
+    ContextUI *ctx_ui;
 
     // ==== Repository ====
     RP_Cell *rp_cell;

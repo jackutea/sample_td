@@ -1,10 +1,10 @@
 #include "..\include\raylib.h"
 #include "..\include\raymath.h"
+#include "B_Game.h"
 #include "Context.h"
 #include "D_Cell.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "B_Game.h"
 
 void Init(Context *ctx);
 void Free(Context *ctx);
@@ -17,6 +17,9 @@ int main() {
     InitWindow(ctx->baseGameWidth, ctx->baseGameHeight, "cyh");
     SetTargetFPS(60);
 
+    // ==== Enter ====
+    App_UI_Login_Open(ctx->ctx_ui);
+
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -24,7 +27,8 @@ int main() {
         float dt = GetFrameTime();
 
         // ==== Input ====
-        if (IsKeyPressed(KEY_SPACE)) {
+        if (App_UI_Login_IsStartClick(ctx->ctx_ui)) {
+            App_UI_Login_Close(ctx->ctx_ui);
             B_Game_Enter(ctx);
         }
 
@@ -37,7 +41,8 @@ int main() {
         EndMode2D();
 
         // ==== Draw UI ====
-        B_Game_DrawUI(ctx);
+        App_UI_Draw(ctx->ctx_ui);
+        // B_Game_DrawUI(ctx);
 
         EndDrawing();
     }
@@ -64,19 +69,26 @@ void Init(Context *ctx) {
     RP_Cell_Init(rp_cell);
     ctx->rp_cell = rp_cell;
 
+    // UI
+    ContextUI *ctx_ui = (ContextUI *)calloc(1, sizeof(ContextUI));
+    ctx->ctx_ui = ctx_ui;
+
     // Template
     Template *tpl = (Template *)calloc(1, sizeof(Template));
     Template_Init(tpl);
     ctx->tpl = tpl;
+    ctx->ctx_ui->tpl = tpl;
 
     // Service
     S_ID *s_id = (S_ID *)calloc(1, sizeof(S_ID));
     ctx->s_id = s_id;
+
 }
 
 void Free(Context *ctx) {
     Template_Free(ctx->tpl);
     RP_Cell_Free(ctx->rp_cell);
+    App_UI_Free(ctx->ctx_ui);
     free(ctx->s_id);
     free(ctx);
 }
