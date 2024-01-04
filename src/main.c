@@ -22,6 +22,8 @@ int main() {
     // ==== Enter ====
     App_UI_Login_Open(ctx->ctx_ui);
 
+    PLog("Start Game %d\r\n", 1);
+
     while (!WindowShouldClose()) {
 
         BeginDrawing();

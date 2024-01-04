@@ -6,6 +6,8 @@
 #include "../include/raymath.h"
 #include "../include/raygui.h"
 
+#define PLog(x,...) printf("%s:%d ",__FILE__, __LINE__); printf(x,__VA_ARGS__)
+
 typedef const char * string;
 
 const int BASE_GRID_SIZE = 24;

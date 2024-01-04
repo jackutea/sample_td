@@ -35,6 +35,7 @@
         "d_cave.h": "c",
         "d_monster.h": "c",
         "tm_monster.h": "c",
-        "tm_level.h": "c"
+        "tm_level.h": "c",
+        "random": "c"
     }
 }
