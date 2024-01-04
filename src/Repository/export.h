@@ -3,5 +3,6 @@
 
 #include "RP_Cell.h"
 #include "RP_Monster.h"
+#include "RP_Cave.h"
 
 #endif

@@ -3,7 +3,7 @@
 #include "../Common.h"
 
 typedef struct E_Monster {
-    
+
     int id;
     int typeID;
 
@@ -24,16 +24,13 @@ void E_Monster_Free(E_Monster *mst) {
     free(mst);
 }
 
+void E_Monster_Move(E_Monster *mst, float dt) {
+    Vector2 moveDiff = Vector2Scale(mst->moveDir, mst->moveSpeed * dt);
+    mst->pos = Vector2Add(mst->pos, moveDiff);
+}
+
 void E_Monster_Draw(E_Monster *mst) {
-    Vector2 center = mst->pos;
-    center = Vector2Subtract(center, Vector2Scale(mst->drawSize, 0.5f));
-    if (mst->drawShape == SHAPE_TYPE_CIRCLE) {
-        DrawCircleV(center, mst->drawSize.x / 2, mst->color);
-    } else if (mst->drawShape == SHAPE_TYPE_RECT) {
-        DrawRectangleV(center, mst->drawSize, mst->color);
-    } else {
-        printf("err E_Monster_Draw: shapeType error\n");
-    }
+    DrawByShapeType(mst->drawShape, mst->pos, mst->drawSize, mst->color);
 }
 
 #endif

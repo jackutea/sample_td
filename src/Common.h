@@ -1,6 +1,7 @@
 #ifndef COMMON_H__
 #define COMMON_H__
 #include <stdbool.h>
+#include <assert.h>
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 #include "../include/raygui.h"
@@ -49,6 +50,23 @@ Rectangle RectangleNewV(Vector2 pos, Vector2 size){
     r.width = size.x;
     r.height = size.y;
     return r;
+}
+
+void DrawByShapeType(ShapeType shape, Vector2 posTL, Vector2 size, Color color){
+    Vector2 center = posTL;
+    center = Vector2Subtract(center, Vector2Scale(size, 0.5f));
+    if (shape == SHAPE_TYPE_CIRCLE) {
+        float edge = 2;
+        DrawCircleV(center, size.x / 2 + edge, BLACK);
+        DrawCircleV(center, size.x / 2, color);
+    } else if (shape == SHAPE_TYPE_RECT) {
+        Vector2 edge = Vector2New(4, 4);
+        Vector2 edgeHalf = Vector2Scale(edge, 0.5f);
+        DrawRectangleV(Vector2Subtract(center, edgeHalf), Vector2Add(size, edge), BLACK);
+        DrawRectangleV(center, size, color);
+    } else {
+        printf("err E_Monster_Draw: shapeType error\n");
+    }
 }
 
 #endif

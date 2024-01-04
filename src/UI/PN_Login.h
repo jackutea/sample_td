@@ -13,6 +13,10 @@ void PN_Login_Ctor(PN_Login *panel) {
     panel->start_text = "Start";
 }
 
+void PN_Login_Free(PN_Login *panel) {
+    free(panel);
+}
+
 void PN_Login_Draw(PN_Login *panel) {
     panel->is_start_click = (bool)GuiButton(panel->start_rect, panel->start_text);
 }

@@ -1,17 +1,21 @@
 #ifndef APP_UI_H__
 #define APP_UI_H__
-#include <stdlib.h>
-#include "PN_Login.h"
 #include "../Template/export.h"
+#include "PN_Login.h"
+#include <stdlib.h>
 
 typedef struct Ctx_UI {
-    Template *tpl;
+
     PN_Login *pn_login;
+
+    // ==== External ====
+    Template *tpl;
+
 } Ctx_UI;
 
 void App_UI_Free(Ctx_UI *ctx) {
     if (ctx->pn_login != NULL) {
-        free(ctx->pn_login);
+        PN_Login_Free(ctx->pn_login);
         ctx->pn_login = NULL;
     }
     free(ctx);
@@ -25,7 +29,7 @@ void App_UI_Draw(Ctx_UI *ctx) {
 
 // Panel: Login
 void App_UI_Login_Open(Ctx_UI *ctx) {
-    PN_Login *panel = (PN_Login*)calloc(1, sizeof(PN_Login));
+    PN_Login *panel = (PN_Login *)calloc(1, sizeof(PN_Login));
     PN_Login_Ctor(panel);
     ctx->pn_login = panel;
 }
@@ -40,7 +44,7 @@ bool App_UI_Login_IsStartClick(Ctx_UI *ctx) {
 
 void App_UI_Login_Close(Ctx_UI *ctx) {
     if (ctx->pn_login != NULL) {
-        free(ctx->pn_login);
+        PN_Login_Free(ctx->pn_login);
         ctx->pn_login = NULL;
     }
 }

@@ -51,7 +51,7 @@ void Template_InitCaves(Template *tpl) {
     TM_Cave *caves = tpl->caves;
 
     // Create: typeID, cd, spawnMaintain, spawnInterval, monsterTypeID;
-    TM_Cave cave1 = TM_Cave_Create(1, 2.0f, 1.0f, 0.1f, 1);
+    TM_Cave cave1 = TM_Cave_Create(1, 2.0f, 1.0f, 0.5f, 1);
     caves[tpl->caveLen++] = cave1;
 }
 
@@ -61,6 +61,7 @@ TM_Cave *Template_GetCave(Template *tpl, int typeID) {
             return &tpl->caves[i];
         }
     }
+    assert(false);
     return NULL;
 }
 
@@ -77,7 +78,7 @@ void Template_InitLevels(Template *tpl) {
 
     l1.caveGeneratorCount = 1;
     l1.caveGenerators = (TM_CaveGenerator *)malloc(sizeof(TM_CaveGenerator) * l1.caveGeneratorCount);
-    l1.caveGenerators[0] = TM_CaveGenerator_Create(1, Vector2New(0, 0));
+    l1.caveGenerators[0] = TM_CaveGenerator_Create(1, Vector2NewScale(0, 9, BASE_GRID_SIZE));
 
 #define cr TM_CellGenerator_Create
     l1.cellCount = 11 * 2;
@@ -116,6 +117,7 @@ TM_Level *Template_GetLevel(Template *tpl, int typeID) {
             return &tpl->levels[i];
         }
     }
+    assert(false);
     return NULL;
 }
 
@@ -141,6 +143,7 @@ TM_Cell *Template_GetCell(Template *tpl, int typeID) {
             return &tpl->cells[i];
         }
     }
+    assert(false);
     return NULL;
 }
 
@@ -152,7 +155,7 @@ void Template_InitMonsters(Template *tpl) {
     TM_Monster *monsters = tpl->monsters;
 
     // Create: typeID, moveSpeed, hp, dropMoney, color, drawShapeType, drawSize
-    TM_Monster m1 = TM_Monster_Create(1, 1, 100, 10, RED, SHAPE_TYPE_RECT, Vector2NewScale(1, 1, BASE_GRID_SIZE));
+    TM_Monster m1 = TM_Monster_Create(1, 10, 100, 1, RED, SHAPE_TYPE_CIRCLE, Vector2NewScale(1, 1, BASE_GRID_SIZE));
     monsters[tpl->monsterLen++] = m1;
 }
 
@@ -162,6 +165,7 @@ TM_Monster *Template_GetMonster(Template *tpl, int typeID) {
             return &tpl->monsters[i];
         }
     }
+    assert(false);
     return NULL;
 }
 

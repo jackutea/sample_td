@@ -46,11 +46,11 @@ E_Cell *RP_Cell_Get(RP_Cell *rp, int id) {
     return NULL;
 }
 
-int RP_Cell_GetAll(RP_Cell *rp, E_Cell **result) {
+int RP_Cell_TakeAll(RP_Cell *rp, E_Cell ***result) {
     for (int i = 0; i < rp->count; i++) {
         rp->tempArray[i] = rp->all[i];
     }
-    result = rp->tempArray;
+    *result = rp->tempArray;
     return rp->count;
 }
 

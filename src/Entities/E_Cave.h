@@ -17,6 +17,10 @@ typedef struct E_Cave {
     float spawnIntervalTimer;
     int spawnMonsterTypeID;
 
-} E_Level;
+} E_Cave;
+
+void E_Cave_Free(E_Cave *cave) {
+    free(cave);
+}
 
 #endif

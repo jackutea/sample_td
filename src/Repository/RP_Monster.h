@@ -16,7 +16,7 @@ void RP_Monster_Init(RP_Monster *rp) {
     rp->all = (E_Monster **)calloc(capacity, sizeof(E_Monster *));
     rp->count = 0;
 
-    rp->temp_all = (E_Monster **)calloc(capacity, sizeof(E_Monster *));
+    rp->temp_all = (E_Monster **)malloc(capacity * sizeof(E_Monster *));
 }
 
 void RP_Monster_Free(RP_Monster *rp) {
@@ -28,14 +28,14 @@ void RP_Monster_Free(RP_Monster *rp) {
 }
 
 void RP_Monster_Add(RP_Monster *rp, E_Monster *monster) {
-    rp->all[rp->count] = monster;
-    rp->count++;
     // 扩容
     if (rp->count >= rp->capacity) {
         rp->capacity *= 2;
         // 保留原来的数据, 重新分配更大的内存
         rp->all = (E_Monster **)realloc(rp->all, rp->capacity * sizeof(E_Monster *));
+        rp->temp_all = (E_Monster **)realloc(rp->temp_all, rp->capacity * sizeof(E_Monster *));
     }
+    rp->all[rp->count++] = monster;
 }
 
 void RP_Monster_Remove(RP_Monster *rp, E_Monster *monster) {
@@ -63,6 +63,14 @@ E_Monster *RP_Monster_Get(RP_Monster *rp, int id) {
         }
     }
     return NULL;
+}
+
+int RP_Monster_TakeAll(RP_Monster *rp, E_Monster ***out_all) {
+    for (int i = 0; i < rp->count; i++) {
+        rp->temp_all[i] = rp->all[i];
+    }
+    *out_all = rp->temp_all;
+    return rp->count;
 }
 
 #endif

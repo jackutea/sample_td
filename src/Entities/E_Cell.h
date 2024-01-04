@@ -19,16 +19,7 @@ void E_Cell_Free(E_Cell *cell) {
 }
 
 void E_Cell_Draw(E_Cell *cell) {
-    Vector2 center = cell->pos;
-    center = Vector2Subtract(center, Vector2Scale(cell->size, 0.5f));
-
-    if (cell->shapeType == SHAPE_TYPE_CIRCLE) {
-        DrawCircleV(center, cell->size.x / 2, cell->color);
-    } else if (cell->shapeType == SHAPE_TYPE_RECT) {
-        DrawRectangleV(center, cell->size, cell->color);
-    } else {
-        printf("err E_Cell_Draw: shapeType error\n");
-    }
+    DrawByShapeType(cell->shapeType, cell->pos, cell->size, cell->color);
 }
 
 #endif
