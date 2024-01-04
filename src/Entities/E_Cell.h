@@ -14,6 +14,10 @@ typedef struct E_Cell {
     Vector2 size;
 } E_Cell;
 
+void E_Cell_Free(E_Cell *cell) {
+    free(cell);
+}
+
 void E_Cell_Draw(E_Cell *cell) {
     Vector2 center = cell->pos;
     center = Vector2Subtract(center, Vector2Scale(cell->size, 0.5f));

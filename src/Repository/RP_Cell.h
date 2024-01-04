@@ -12,13 +12,12 @@ typedef struct RP_Cell {
 void RP_Cell_Init(RP_Cell *rp) {
     rp->all = (E_Cell **)calloc(40 * 23 * 10, sizeof(E_Cell *));
     rp->tempArray = (E_Cell **)calloc(40 * 23 * 10, sizeof(E_Cell *));
-    printf("%d", sizeof(E_Cell *));
     rp->count = 0;
 }
 
 void RP_Cell_Free(RP_Cell *rp) {
     for (int i = 0; i < rp->count; i++) {
-        free(rp->all[i]);
+        E_Cell_Free(rp->all[i]);
     }
     free(rp->all);
     free(rp);

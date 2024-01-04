@@ -31,6 +31,10 @@
         "tm_cell.h": "c",
         "array": "c",
         "string_view": "c",
-        "initializer_list": "c"
+        "initializer_list": "c",
+        "d_cave.h": "c",
+        "d_monster.h": "c",
+        "tm_monster.h": "c",
+        "tm_level.h": "c"
     }
 }

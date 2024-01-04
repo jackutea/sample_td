@@ -20,6 +20,10 @@ typedef struct E_Monster {
 
 } E_Monster;
 
+void E_Monster_Free(E_Monster *mst) {
+    free(mst);
+}
+
 void E_Monster_Draw(E_Monster *mst) {
     Vector2 center = mst->pos;
     center = Vector2Subtract(center, Vector2Scale(mst->drawSize, 0.5f));

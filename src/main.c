@@ -70,6 +70,10 @@ void Init(Ctx *_ctx) {
     RP_Cell_Init(rp_cell);
     _ctx->rp_cell = rp_cell;
 
+    RP_Monster *rp_monster = (RP_Monster *)calloc(1, sizeof(RP_Monster));
+    RP_Monster_Init(rp_monster);
+    _ctx->rp_monster = rp_monster;
+
     // UI
     Ctx_UI *ctx_ui = (Ctx_UI *)calloc(1, sizeof(Ctx_UI));
     _ctx->ctx_ui = ctx_ui;
@@ -100,6 +104,7 @@ void DrawUI(Ctx *_ctx) {
 void Free(Ctx *_ctx) {
     Template_Free(_ctx->tpl);
     RP_Cell_Free(_ctx->rp_cell);
+    RP_Monster_Free(_ctx->rp_monster);
     App_UI_Free(_ctx->ctx_ui);
     free(_ctx->s_id);
     free(_ctx);

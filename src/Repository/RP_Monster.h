@@ -19,6 +19,14 @@ void RP_Monster_Init(RP_Monster *rp) {
     rp->temp_all = (E_Monster **)calloc(capacity, sizeof(E_Monster *));
 }
 
+void RP_Monster_Free(RP_Monster *rp) {
+    for (int i = 0; i < rp->count; i++) {
+        E_Monster_Free(rp->all[i]);
+    }
+    free(rp->all);
+    free(rp);
+}
+
 void RP_Monster_Add(RP_Monster *rp, E_Monster *monster) {
     rp->all[rp->count] = monster;
     rp->count++;

@@ -19,6 +19,7 @@ typedef struct Ctx {
 
     // ==== Repository ====
     RP_Cell *rp_cell;
+    RP_Monster *rp_monster;
 
     // ==== Template ====
     Template *tpl;
