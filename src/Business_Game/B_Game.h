@@ -3,8 +3,21 @@
 #include "D_Cell.h"
 #include "import.h"
 
-// B: Business
-// LifeCycle, 生命周期函数
+void B_Game_Enter(Ctx *ctx) {
+
+    // 生成格子
+    TM_Level *level = Template_GetLevel(ctx->tpl, 1);
+    for (int i = 0; i < level->cellCount; i++) {
+        Vector2 pos = level->cellPoses[i];
+        pos = Vector2Scale(pos, BASE_GRID_SIZE);
+        D_Cell_Spawn(ctx, 1, pos);
+    }
+
+    // 生成生成器
+
+    // 生成玩家状态: 可建造列表, 金钱, 生命值
+}
+
 void B_Game_Tick(Ctx *ctx, float dt) {
 }
 
@@ -17,23 +30,6 @@ void B_Game_Draw(Ctx *ctx) {
 }
 
 void B_Game_DrawUI(Ctx *ctx) {
-}
-
-// 业务函数
-void B_Game_Enter(Ctx *ctx) {
-
-    // 生成格子
-    for (int x = -20; x <= 20; x++) {
-        for (int y = -11; y <= 11; y++) {
-            Vector2 pos = Vector2New(x, y);
-            pos = Vector2Scale(pos, BASE_GRID_SIZE);
-            D_Cell_Spawn(ctx, 1, pos);
-        }
-    }
-
-    // 生成生成器
-
-    // 生成玩家状态: 可建造列表, 金钱, 生命值
 }
 
 #endif

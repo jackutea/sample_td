@@ -27,6 +27,10 @@
         "factory.h": "c",
         "ctx.h": "c",
         "import.h": "c",
-        "e_monster.h": "c"
+        "e_monster.h": "c",
+        "tm_cell.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }
