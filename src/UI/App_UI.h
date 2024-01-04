@@ -2,14 +2,14 @@
 #define APP_UI_H__
 #include <stdlib.h>
 #include "PN_Login.h"
-#include "Template.h"
+#include "../Template/export.h"
 
-typedef struct ContextUI {
+typedef struct Ctx_UI {
     Template *tpl;
     PN_Login *pn_login;
-} ContextUI;
+} Ctx_UI;
 
-void App_UI_Free(ContextUI *ctx) {
+void App_UI_Free(Ctx_UI *ctx) {
     if (ctx->pn_login != NULL) {
         free(ctx->pn_login);
         ctx->pn_login = NULL;
@@ -17,20 +17,20 @@ void App_UI_Free(ContextUI *ctx) {
     free(ctx);
 }
 
-void App_UI_Draw(ContextUI *ctx) {
+void App_UI_Draw(Ctx_UI *ctx) {
     if (ctx->pn_login != NULL) {
         PN_Login_Draw(ctx->pn_login);
     }
 }
 
 // Panel: Login
-void App_UI_Login_Open(ContextUI *ctx) {
+void App_UI_Login_Open(Ctx_UI *ctx) {
     PN_Login *panel = (PN_Login*)calloc(1, sizeof(PN_Login));
     PN_Login_Ctor(panel);
     ctx->pn_login = panel;
 }
 
-bool App_UI_Login_IsStartClick(ContextUI *ctx) {
+bool App_UI_Login_IsStartClick(Ctx_UI *ctx) {
     PN_Login *panel = ctx->pn_login;
     if (panel != NULL) {
         return PN_Loign_IsStartClick(panel);
@@ -38,7 +38,7 @@ bool App_UI_Login_IsStartClick(ContextUI *ctx) {
     return false;
 }
 
-void App_UI_Login_Close(ContextUI *ctx) {
+void App_UI_Login_Close(Ctx_UI *ctx) {
     if (ctx->pn_login != NULL) {
         free(ctx->pn_login);
         ctx->pn_login = NULL;

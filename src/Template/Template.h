@@ -1,7 +1,7 @@
 #ifndef TEMPLATE_H__
 #define TEMPLATE_H__
 #include <stdlib.h>
-#include "E_Cell.h"
+#include "TM_Cell.h"
 
 typedef struct Template {
     TM_Cell *cells;

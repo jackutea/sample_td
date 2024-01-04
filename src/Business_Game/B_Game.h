@@ -1,13 +1,14 @@
 #ifndef B_GAME_H__
 #define B_GAME_H__
-#include "Context.h"
 #include "D_Cell.h"
+#include "import.h"
 
 // B: Business
 // LifeCycle, 生命周期函数
-void B_Game_Tick(Context *ctx, float dt) {}
+void B_Game_Tick(Ctx *ctx, float dt) {
+}
 
-void B_Game_Draw(Context *ctx) {
+void B_Game_Draw(Ctx *ctx) {
     int cellLen = ctx->rp_cell->count;
     for (int i = 0; i < cellLen; i++) {
         E_Cell *cell = ctx->rp_cell->all[i];
@@ -15,10 +16,11 @@ void B_Game_Draw(Context *ctx) {
     }
 }
 
-void B_Game_DrawUI(Context *ctx) {}
+void B_Game_DrawUI(Ctx *ctx) {
+}
 
 // 业务函数
-void B_Game_Enter(Context *ctx) {
+void B_Game_Enter(Ctx *ctx) {
 
     // 生成格子
     for (int x = -20; x <= 20; x++) {

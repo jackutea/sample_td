@@ -1,8 +1,8 @@
 #ifndef FACTORY_H__
 #define FACTORY_H__
-#include "Context.h"
+#include "Ctx.h"
 
-E_Cell *Factory_Create_Cell(Context *ctx, int typeID, Vector2 pos) {
+E_Cell *Factory_Create_Cell(Ctx *ctx, int typeID, Vector2 pos) {
 
     TM_Cell *tm = Template_GetCell(ctx->tpl, typeID);
     if (tm == NULL) {

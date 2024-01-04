@@ -1,17 +1,19 @@
-#include "..\include\raylib.h"
-#include "..\include\raymath.h"
-#include "B_Game.h"
-#include "Context.h"
-#include "D_Cell.h"
+#define RAYGUI_IMPLEMENTATION
+#include "Business_Game/export.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void Init(Context *ctx);
-void Free(Context *ctx);
+void Init(Ctx *_ctx);
+void Tick(Ctx *_ctx, float dt);
+void DrawWorld(Ctx *_ctx);
+void DrawUI(Ctx *_ctx);
+void Free(Ctx *_ctx);
+
+static Ctx *ctx;
 
 int main() {
 
-    Context *ctx = (Context *)calloc(1, sizeof(Context));
+    ctx = (Ctx *)calloc(1, sizeof(Ctx));
     Init(ctx);
 
     InitWindow(ctx->baseGameWidth, ctx->baseGameHeight, "cyh");
@@ -33,16 +35,15 @@ int main() {
         }
 
         // ==== Logic Tick ====
-        B_Game_Tick(ctx, dt);
+        Tick(ctx, dt);
 
         // ==== Draw World ====
         BeginMode2D(*ctx->cam);
-        B_Game_Draw(ctx);
+        DrawWorld(ctx);
         EndMode2D();
 
         // ==== Draw UI ====
-        App_UI_Draw(ctx->ctx_ui);
-        // B_Game_DrawUI(ctx);
+        DrawUI(ctx);
 
         EndDrawing();
     }
@@ -51,44 +52,55 @@ int main() {
     return 0;
 }
 
-void Init(Context *ctx) {
+void Init(Ctx *_ctx) {
 
-    ctx->baseGameWidth = 960;
-    ctx->baseGameHeight = 540;
+    _ctx->baseGameWidth = 960;
+    _ctx->baseGameHeight = 540;
 
     // Camera
     Camera2D *cam = (Camera2D *)calloc(1, sizeof(Camera2D));
-    cam->offset = (Vector2){ctx->baseGameWidth / 2, ctx->baseGameHeight / 2};
+    cam->offset = (Vector2){_ctx->baseGameWidth / 2, _ctx->baseGameHeight / 2};
     cam->target = (Vector2){0, 0};
     cam->rotation = 0;
     cam->zoom = 1;
-    ctx->cam = cam;
+    _ctx->cam = cam;
 
     // Repository
     RP_Cell *rp_cell = (RP_Cell *)calloc(1, sizeof(RP_Cell));
     RP_Cell_Init(rp_cell);
-    ctx->rp_cell = rp_cell;
+    _ctx->rp_cell = rp_cell;
 
     // UI
-    ContextUI *ctx_ui = (ContextUI *)calloc(1, sizeof(ContextUI));
-    ctx->ctx_ui = ctx_ui;
+    Ctx_UI *ctx_ui = (Ctx_UI *)calloc(1, sizeof(Ctx_UI));
+    _ctx->ctx_ui = ctx_ui;
 
     // Template
     Template *tpl = (Template *)calloc(1, sizeof(Template));
     Template_Init(tpl);
-    ctx->tpl = tpl;
-    ctx->ctx_ui->tpl = tpl;
+    _ctx->tpl = tpl;
+    _ctx->ctx_ui->tpl = tpl;
 
     // Service
     S_ID *s_id = (S_ID *)calloc(1, sizeof(S_ID));
-    ctx->s_id = s_id;
-
+    _ctx->s_id = s_id;
 }
 
-void Free(Context *ctx) {
-    Template_Free(ctx->tpl);
-    RP_Cell_Free(ctx->rp_cell);
-    App_UI_Free(ctx->ctx_ui);
-    free(ctx->s_id);
-    free(ctx);
+void Tick(Ctx *_ctx, float dt) {
+    B_Game_Tick(ctx, dt);
+}
+
+void DrawWorld(Ctx *_ctx) {
+    B_Game_Draw(ctx);
+}
+
+void DrawUI(Ctx *_ctx) {
+    App_UI_Draw(ctx->ctx_ui);
+}
+
+void Free(Ctx *_ctx) {
+    Template_Free(_ctx->tpl);
+    RP_Cell_Free(_ctx->rp_cell);
+    App_UI_Free(_ctx->ctx_ui);
+    free(_ctx->s_id);
+    free(_ctx);
 }

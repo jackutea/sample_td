@@ -1,15 +1,17 @@
 #ifndef RP_CELL_H__
 #define RP_CELL_H__
-#include "E_Cell.h"
 #include <stdlib.h>
+#include "import.h"
 
 typedef struct RP_Cell {
     E_Cell **all;
     int count;
+    E_Cell **tempArray;
 } RP_Cell;
 
 void RP_Cell_Init(RP_Cell *rp) {
     rp->all = (E_Cell **)calloc(40 * 23 * 10, sizeof(E_Cell *));
+    rp->tempArray = (E_Cell **)calloc(40 * 23 * 10, sizeof(E_Cell *));
     printf("%d", sizeof(E_Cell *));
     rp->count = 0;
 }
@@ -45,11 +47,12 @@ E_Cell *RP_Cell_Get(RP_Cell *rp, int id) {
     return NULL;
 }
 
-// int RP_Cell_GetAll(RP_Cell *rp, E_Cell **result) {
-//     for (int i = 0; i < rp->count; i++) {
-//         result[i] = rp->all[i];
-//     }
-//     return rp->count;
-// }
+int RP_Cell_GetAll(RP_Cell *rp, E_Cell **result) {
+    for (int i = 0; i < rp->count; i++) {
+        rp->tempArray[i] = rp->all[i];
+    }
+    result = rp->tempArray;
+    return rp->count;
+}
 
 #endif

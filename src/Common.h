@@ -1,5 +1,11 @@
 #ifndef COMMON_H__
 #define COMMON_H__
+#include <stdbool.h>
+#include "../include/raylib.h"
+#include "../include/raymath.h"
+#include "../include/raygui.h"
+
+typedef const char * string;
 
 const int BASE_GRID_SIZE = 24;
 
@@ -25,6 +31,24 @@ Vector2 Vector2NewScale(float x, float y, float scale){
     v.x = x * scale;
     v.y = y * scale;
     return v;
+}
+
+Rectangle RectangleNew(float x, float y, float w, float h){
+    Rectangle r;
+    r.x = x;
+    r.y = y;
+    r.width = w;
+    r.height = h;
+    return r;
+}
+
+Rectangle RectangleNewV(Vector2 pos, Vector2 size){
+    Rectangle r;
+    r.x = pos.x;
+    r.y = pos.y;
+    r.width = size.x;
+    r.height = size.y;
+    return r;
 }
 
 #endif

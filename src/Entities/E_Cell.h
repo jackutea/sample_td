@@ -1,16 +1,7 @@
 #ifndef E_CELL_H__
 #define E_CELL_H__
-#include "../include/raylib.h"
-#include "../include/raymath.h"
-#include "Common.h"
 #include <stdio.h>
-
-typedef struct TM_Cell {
-    int typeID;
-    ShapeType shapeType;
-    Color color;
-    Vector2 size;
-} TM_Cell;
+#include "../Common.h"
 
 typedef struct E_Cell {
     int id;
